@@ -13,7 +13,7 @@ public class CustomerTest {
         Movie movie = new Movie("", PriceCodes.REGULAR);
         Rental rental = new Rental(movie, 1);
         testee.addRental(rental);
-        Assert.assertTrue("Check price correctness for REGULAR movie", testee.buildStatement().contains("2"));
+        Assert.assertTrue("Check price correctness for REGULAR movie", testee.buildStatementString().contains("2"));
     }
 
     @Test
@@ -22,7 +22,7 @@ public class CustomerTest {
         Movie movie = new Movie("", PriceCodes.REGULAR);
         Rental rental = new Rental(movie, 3);
         testee.addRental(rental);
-        Assert.assertTrue("Check price correctness for REGULAR movie", testee.buildStatement().contains("3.5"));
+        Assert.assertTrue("Check price correctness for REGULAR movie", testee.buildStatementString().contains("3.5"));
     }
 
     @Test
@@ -31,7 +31,7 @@ public class CustomerTest {
         Movie movie = new Movie("", PriceCodes.NEW_RELEASE);
         Rental rental = new Rental(movie, 3);
         testee.addRental(rental);
-        Assert.assertTrue("Check price correctness for new release movie", testee.buildStatement().contains("9"));
+        Assert.assertTrue("Check price correctness for new release movie", testee.buildStatementString().contains("9"));
     }
 
     @Test
@@ -40,7 +40,7 @@ public class CustomerTest {
         Movie movie = new Movie("", PriceCodes.CHILDRENS);
         Rental rental = new Rental(movie, 1);
         testee.addRental(rental);
-        Assert.assertTrue("Check price correctness for children's movie", testee.buildStatement().contains("1.5"));
+        Assert.assertTrue("Check price correctness for children's movie", testee.buildStatementString().contains("1.5"));
     }
 
     @Test
@@ -49,7 +49,7 @@ public class CustomerTest {
         Movie movie = new Movie("", PriceCodes.CHILDRENS);
         Rental rental = new Rental(movie, 5);
         testee.addRental(rental);
-        Assert.assertTrue("Check price correctness for children's movie", testee.buildStatement().contains("3"));
+        Assert.assertTrue("Check price correctness for children's movie", testee.buildStatementString().contains("3"));
     }
 
     @Test
@@ -64,7 +64,7 @@ public class CustomerTest {
         Customer testee = new Customer("");
         testee.addRental(rental);
 
-        Assert.assertTrue("Check renter points correctness for REGULAR movie", testee.buildStatement().contains("1"));
+        Assert.assertTrue("Check renter points correctness for REGULAR movie", testee.buildStatementString().contains("1"));
     }
 
     @Test
@@ -79,7 +79,7 @@ public class CustomerTest {
         Customer testee = new Customer("");
         testee.addRental(rental);
 
-        Assert.assertTrue("Check renter points correctness for children movie", testee.buildStatement().contains("1"));
+        Assert.assertTrue("Check renter points correctness for children movie", testee.buildStatementString().contains("1"));
     }
 
     @Test
@@ -94,7 +94,7 @@ public class CustomerTest {
         Customer testee = new Customer("");
         testee.addRental(rental);
 
-        Assert.assertTrue("Check renter points correctness for children movie", testee.buildStatement().contains("1"));
+        Assert.assertTrue("Check renter points correctness for children movie", testee.buildStatementString().contains("1"));
     }
 
     @Test
@@ -109,7 +109,7 @@ public class CustomerTest {
         Customer testee = new Customer("");
         testee.addRental(rental);
 
-        Assert.assertTrue("Check renter points correctness for children movie", testee.buildStatement().contains("2"));
+        Assert.assertTrue("Check renter points correctness for children movie", testee.buildStatementString().contains("2"));
     }
 
 }

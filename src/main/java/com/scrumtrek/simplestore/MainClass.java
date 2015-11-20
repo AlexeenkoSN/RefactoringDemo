@@ -16,7 +16,7 @@ class MainClass {
         mickeyMouse.addRental(new Rental(starWars, 5));
         mickeyMouse.addRental(new Rental(gladiator, 5));
 
-        String statement = mickeyMouse.buildStatement();
+        String statement = mickeyMouse.buildStatementString();
 
         System.out.println(statement);
     }

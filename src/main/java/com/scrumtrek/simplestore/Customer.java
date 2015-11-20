@@ -15,23 +15,32 @@ public class Customer {
         rentals.add(rental);
     }
 
-    public String buildStatement() {
-        double totalPrice = 0;
-        int frequentRenterPoints = 0;
+    public String buildStatementString() {
+        Statement statement = buildStatement();
 
-        String result = "Rental record for " + name + "\n";
+        String result = "Rental record for " + statement.getCustomerName() + "\n";
 
-        for (Rental rental : rentals) {
-            double price = calculatePrice(rental);
-            totalPrice += price;
-            frequentRenterPoints += calculateRenterPoints(rental);
-
-            result += "\t" + rental.getMovie().getTitle() + "\t" + price + "\n";
+        for (StatementLine statementLine : statement.getStatementLines()) {
+            result += "\t" + statementLine.getTitle() + "\t" + statementLine.getPrice() + "\n";
         }
 
-        result += "Amount owed is " + totalPrice + "\n";
-        result += "You earned " + frequentRenterPoints + " frequent renter points.";
+        result += "Amount owed is " + statement.getTotalPrice() + "\n";
+        result += "You earned " + statement.getFrequentRenterPoints() + " frequent renter points.";
         return result;
+    }
+
+    private Statement buildStatement() {
+        Statement statement = new Statement(name);
+
+        for (Rental rental : rentals) {
+
+            statement.addLine(new StatementLine(
+                    rental.getMovie().getTitle(),
+                    calculatePrice(rental),
+                    calculateRenterPoints(rental)));
+        }
+
+        return statement;
     }
 
     private int calculateRenterPoints(Rental rental) {
