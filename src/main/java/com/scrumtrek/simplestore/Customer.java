@@ -6,9 +6,11 @@ import java.util.List;
 public class Customer {
     private final String name;
     private final List<Rental> rentals = new ArrayList<>();
+    private final StatementBuilder statementBuilder;
 
     public Customer(String name) {
         this.name = name;
+        statementBuilder = new StatementBuilder(this);
     }
 
     public void addRental(Rental rental) {
@@ -16,7 +18,7 @@ public class Customer {
     }
 
     public String buildStatementString() {
-        Statement statement = buildStatement();
+        Statement statement = statementBuilder.buildStatement();
 
         String result = "Rental record for " + statement.getCustomerName() + "\n";
 
@@ -29,64 +31,12 @@ public class Customer {
         return result;
     }
 
-    private Statement buildStatement() {
-        Statement statement = new Statement(name);
-
-        for (Rental rental : rentals) {
-
-            statement.addLine(new StatementLine(
-                    rental.getMovie().getTitle(),
-                    calculatePrice(rental),
-                    calculateRenterPoints(rental)));
-        }
-
-        return statement;
+    public String getName() {
+        return name;
     }
 
-    private int calculateRenterPoints(Rental rental) {
-        int renterPoints = 1;
-        if ((rental.getMovie().getPriceCode() == PriceCodes.NEW_RELEASE) && (rental.getDaysRented() > 1)) {
-            renterPoints++;
-        }
-
-        return renterPoints;
-    }
-
-    private double calculatePrice(Rental rental) {
-        switch (rental.getMovie().getPriceCode()) {
-            case REGULAR:
-                return calculateRegularPrice(rental);
-
-            case NEW_RELEASE:
-                return calculateNewReleasePrice(rental);
-
-            case CHILDRENS:
-                return  calculateChildrenPrice(rental);
-            default:
-                return 0;
-        }
-    }
-
-    private double calculateChildrenPrice(Rental rental) {
-        double resultPrice = 1.5;
-        if (rental.getDaysRented() > 3)
-        {
-            resultPrice = (rental.getDaysRented() - 3) * 1.5;
-        }
-        return resultPrice;
-    }
-
-    private double calculateNewReleasePrice(Rental rental) {
-        return rental.getDaysRented() * 3.0;
-    }
-
-    private double calculateRegularPrice(Rental rental) {
-        double resultPrice = 2;
-        if (rental.getDaysRented() > 2)
-        {
-            resultPrice += (rental.getDaysRented() - 2) * 1.5;
-        }
-        return resultPrice;
+    public List<Rental> getRentals() {
+        return rentals;
     }
 }
 
