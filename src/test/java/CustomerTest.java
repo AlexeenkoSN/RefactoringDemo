@@ -51,4 +51,65 @@ public class CustomerTest {
         testee.addRental(rental);
         Assert.assertTrue("Check price correctness for children's movie", testee.buildStatement().contains("3"));
     }
+
+    @Test
+    public void shouldRenterPointsBeCorrectWhenRegularMoviePassed()
+    {
+        Movie movie = MovieBuilder
+                .create()
+                .withPriceCode(PriceCodes.Regular)
+                .build();
+        Rental rental = new Rental(movie, 1);
+
+        Customer testee = new Customer("");
+        testee.addRental(rental);
+
+        Assert.assertTrue("Check renter points correctness for regular movie", testee.buildStatement().contains("1"));
+    }
+
+    @Test
+    public void shouldRenterPointsBeCorrectWhenChildrenMoviePassed()
+    {
+        Movie movie = MovieBuilder
+                .create()
+                .withPriceCode(PriceCodes.Childrens)
+                .build();
+        Rental rental = new Rental(movie, 1);
+
+        Customer testee = new Customer("");
+        testee.addRental(rental);
+
+        Assert.assertTrue("Check renter points correctness for children movie", testee.buildStatement().contains("1"));
+    }
+
+    @Test
+    public void shouldRenterPointsBeCorrectWhenOneDayRentalForReleaseMovie()
+    {
+        Movie movie = MovieBuilder
+                .create()
+                .withPriceCode(PriceCodes.NewRelease)
+                .build();
+        Rental rental = new Rental(movie, 1);
+
+        Customer testee = new Customer("");
+        testee.addRental(rental);
+
+        Assert.assertTrue("Check renter points correctness for children movie", testee.buildStatement().contains("1"));
+    }
+
+    @Test
+    public void shouldRenterPointsBeCorrectWhenMoreThanOneDayRentalForReleaseMovie()
+    {
+        Movie movie = MovieBuilder
+                .create()
+                .withPriceCode(PriceCodes.NewRelease)
+                .build();
+        Rental rental = new Rental(movie, 3);
+
+        Customer testee = new Customer("");
+        testee.addRental(rental);
+
+        Assert.assertTrue("Check renter points correctness for children movie", testee.buildStatement().contains("2"));
+    }
+
 }
