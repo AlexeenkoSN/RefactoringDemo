@@ -4,82 +4,80 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Customer {
-	final private String m_Name;
-	final private List<Rental> m_Rentals = new ArrayList<>();
+    private final String name;
+    private final List<Rental> rentals = new ArrayList<>();
 
-	public Customer(String name) {
-		m_Name = name;
-	}
+    public Customer(String name) {
+        this.name = name;
+    }
 
-	public void addRental(Rental rental){
-		m_Rentals.add(rental);
-	}
+    public void addRental(Rental rental) {
+        rentals.add(rental);
+    }
 
-	public String buildStatement()
-	{
-		double totalPrice = 0;
-		int frequentRenterPoints = 0;
-				
-		String result = "Rental record for " + m_Name + "\n";
-		
-		for(Rental rental: m_Rentals) {
-			double price = calculatePrice(rental);
-			totalPrice += price;
-			frequentRenterPoints += calculateRenterPoints(rental);
+    public String buildStatement() {
+        double totalPrice = 0;
+        int frequentRenterPoints = 0;
 
-			result += "\t" + rental.getMovie().getTitle() + "\t" + price + "\n";
-		}
+        String result = "Rental record for " + name + "\n";
 
-		result += "Amount owed is " + totalPrice + "\n";
-		result += "You earned " + frequentRenterPoints + " frequent renter points.";
-		return result;
-	}
+        for (Rental rental : rentals) {
+            double price = calculatePrice(rental);
+            totalPrice += price;
+            frequentRenterPoints += calculateRenterPoints(rental);
 
-	private int calculateRenterPoints(Rental rental) {
-		int renterPoints = 1;
-		if ((rental.getMovie().getPriceCode() == PriceCodes.NewRelease) && (rental.getDaysRented() > 1))
-		{
-			renterPoints++;
-		}
+            result += "\t" + rental.getMovie().getTitle() + "\t" + price + "\n";
+        }
 
-		return renterPoints;
-	}
+        result += "Amount owed is " + totalPrice + "\n";
+        result += "You earned " + frequentRenterPoints + " frequent renter points.";
+        return result;
+    }
 
-	private double calculatePrice(Rental rental) {
-		switch(rental.getMovie().getPriceCode()) {
-            case Regular:
+    private int calculateRenterPoints(Rental rental) {
+        int renterPoints = 1;
+        if ((rental.getMovie().getPriceCode() == PriceCodes.newRelease) && (rental.getDaysRented() > 1)) {
+            renterPoints++;
+        }
+
+        return renterPoints;
+    }
+
+    private double calculatePrice(Rental rental) {
+        switch (rental.getMovie().getPriceCode()) {
+            case regular:
                 return calculateRegularPrice(rental);
 
-            case NewRelease:
-				return calculateNewReleasePrice(rental);
+            case newRelease:
+                return calculateNewReleasePrice(rental);
 
-            case Childrens:
+            case childrens:
                 return  calculateChildrenPrice(rental);
             default:
                 return 0;
         }
-	}
+    }
 
-	private double calculateChildrenPrice(Rental rental) {
-		double resultPrice = 1.5;
-		if (rental.getDaysRented() > 3)
+    private double calculateChildrenPrice(Rental rental) {
+        double resultPrice = 1.5;
+        if (rental.getDaysRented() > 3)
         {
             resultPrice = (rental.getDaysRented() - 3) * 1.5;
         }
-		return resultPrice;
-	}
+        return resultPrice;
+    }
 
-	private double calculateNewReleasePrice(Rental rental) {
-		return rental.getDaysRented() * 3.0;
-	}
+    private double calculateNewReleasePrice(Rental rental) {
+        return rental.getDaysRented() * 3.0;
+    }
 
-	private double calculateRegularPrice(Rental rental) {
-		double resultPrice = 2;
-		if (rental.getDaysRented() > 2)
+    private double calculateRegularPrice(Rental rental) {
+        double resultPrice = 2;
+        if (rental.getDaysRented() > 2)
         {
             resultPrice += (rental.getDaysRented() - 2) * 1.5;
         }
-		return resultPrice;
-	}
+        return resultPrice;
+    }
 }
 
