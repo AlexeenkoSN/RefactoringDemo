@@ -36,7 +36,7 @@ public class Customer {
 
     private int calculateRenterPoints(Rental rental) {
         int renterPoints = 1;
-        if ((rental.getMovie().getPriceCode() == PriceCodes.PRICE_CODES) && (rental.getDaysRented() > 1)) {
+        if ((rental.getMovie().getPriceCode() == PriceCodes.NEW_RELEASE) && (rental.getDaysRented() > 1)) {
             renterPoints++;
         }
 
@@ -48,7 +48,7 @@ public class Customer {
             case REGULAR:
                 return calculateRegularPrice(rental);
 
-            case PRICE_CODES:
+            case NEW_RELEASE:
                 return calculateNewReleasePrice(rental);
 
             case CHILDRENS:

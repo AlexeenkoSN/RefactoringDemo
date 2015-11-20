@@ -8,7 +8,7 @@ class MainClass {
     static void main() {
         Movie cinderella = new Movie("Cinderella", PriceCodes.CHILDRENS);
         Movie starWars = new Movie("Star Wars", PriceCodes.REGULAR);
-        Movie gladiator = new Movie("Gladiator", PriceCodes.PRICE_CODES);
+        Movie gladiator = new Movie("Gladiator", PriceCodes.NEW_RELEASE);
 
         Customer mickeyMouse = new Customer("Mickey Mouse");
 
