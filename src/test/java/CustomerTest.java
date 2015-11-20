@@ -28,7 +28,7 @@ public class CustomerTest {
     @Test
     public void shouldStatementContainRightPriceWhenNewReleaseMoviePassed(){
         Customer testee = new Customer("");
-        Movie movie = new Movie("", PriceCodes.PRICE_CODES);
+        Movie movie = new Movie("", PriceCodes.NEW_RELEASE);
         Rental rental = new Rental(movie, 3);
         testee.addRental(rental);
         Assert.assertTrue("Check price correctness for new release movie", testee.buildStatement().contains("9"));
@@ -87,7 +87,7 @@ public class CustomerTest {
     {
         Movie movie = MovieBuilder
                 .create()
-                .withPriceCode(PriceCodes.PRICE_CODES)
+                .withPriceCode(PriceCodes.NEW_RELEASE)
                 .build();
         Rental rental = new Rental(movie, 1);
 
@@ -102,7 +102,7 @@ public class CustomerTest {
     {
         Movie movie = MovieBuilder
                 .create()
-                .withPriceCode(PriceCodes.PRICE_CODES)
+                .withPriceCode(PriceCodes.NEW_RELEASE)
                 .build();
         Rental rental = new Rental(movie, 3);
 
