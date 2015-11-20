@@ -11,61 +11,75 @@ public class Customer {
 		m_Name = name;
 	}
 
-	public void addRental(Rental arg){
-		m_Rentals.add(arg);
+	public void addRental(Rental rental){
+		m_Rentals.add(rental);
 	}
 
-	public String Statement()
+	public String buildStatement()
 	{
-		double totalAmount = 0;
+		double totalPrice = 0;
 		int frequentRenterPoints = 0;
 				
 		String result = "Rental record for " + m_Name + "\n";
 		
-		for(Rental each: m_Rentals) {
-			double thisAmount = 0;
-			
-			// Determine amounts for each line
-			switch(each.getMovie().getPriceCode()) {
-				case Regular:
-					thisAmount += 2;
-					if (each.getDaysRented() > 2)
-					{
-						thisAmount += (each.getDaysRented() - 2) * 1.5;
-					}
-					break;
-	
-				case NewRelease:
-					thisAmount += each.getDaysRented() * 3;
-					break;
-	
-				case Childrens:
-					thisAmount += 1.5;
-					if (each.getDaysRented() > 3)
-					{
-						thisAmount = (each.getDaysRented() - 3) * 1.5;
-					}
-					break;
-			}
+		for(Rental rental: m_Rentals) {
+			double price = calculatePrice(rental);
+			totalPrice += price;
+			frequentRenterPoints += calculateRenterPoints(rental);
 
-			// Add frequent renter points
-			frequentRenterPoints++;
-
-			// Add bonus for a two-day new-release rental
-			if ((each.getMovie().getPriceCode() == PriceCodes.NewRelease) && (each.getDaysRented() > 1))
-			{
-				frequentRenterPoints ++;
-			}
-
-			// Show figures for this rental
-			result += "\t" + each.getMovie().getTitle() + "\t" + thisAmount + "\n";
-			totalAmount += thisAmount;
+			result += "\t" + rental.getMovie().getTitle() + "\t" + price + "\n";
 		}
 
-		// Add footer lines
-		result += "Amount owed is " + totalAmount + "\n";
+		result += "Amount owed is " + totalPrice + "\n";
 		result += "You earned " + frequentRenterPoints + " frequent renter points.";
 		return result;
+	}
+
+	private int calculateRenterPoints(Rental rental) {
+		int renterPoints = 1;
+		if ((rental.getMovie().getPriceCode() == PriceCodes.NewRelease) && (rental.getDaysRented() > 1))
+		{
+			renterPoints++;
+		}
+
+		return renterPoints;
+	}
+
+	private double calculatePrice(Rental rental) {
+		switch(rental.getMovie().getPriceCode()) {
+            case Regular:
+                return calculateRegularPrice(rental);
+
+            case NewRelease:
+				return calculateNewReleasePrice(rental);
+
+            case Childrens:
+                return  calculateChildrenPrice(rental);
+        }
+
+		return 0;
+	}
+
+	private double calculateChildrenPrice(Rental rental) {
+		double thisAmount = 1.5;
+		if (rental.getDaysRented() > 3)
+        {
+            thisAmount = (rental.getDaysRented() - 3) * 1.5;
+        }
+		return thisAmount;
+	}
+
+	private double calculateNewReleasePrice(Rental rental) {
+		return rental.getDaysRented() * 3;
+	}
+
+	private double calculateRegularPrice(Rental rental) {
+		double thisAmount = 2;
+		if (rental.getDaysRented() > 2)
+        {
+            thisAmount += (rental.getDaysRented() - 2) * 1.5;
+        }
+		return thisAmount;
 	}
 }
 

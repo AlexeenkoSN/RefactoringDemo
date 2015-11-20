@@ -11,7 +11,7 @@ public class RentalTest {
         Movie dummy = mock(Movie.class);
         Rental rental = new Rental(dummy, 4);
 
-        Assert.assertEquals(4, rental.getDaysRented());
+        Assert.assertEquals("Check rental correctness", 4, rental.getDaysRented());
     }
 
     @Test
@@ -19,6 +19,6 @@ public class RentalTest {
         Movie dummy = mock(Movie.class);
         Rental rental = new Rental(dummy, 4);
 
-        Assert.assertEquals(dummy, rental.getMovie());
+        Assert.assertEquals("Check movie correctness" ,dummy, rental.getMovie());
     }
 }

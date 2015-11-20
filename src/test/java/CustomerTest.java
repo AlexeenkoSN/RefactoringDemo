@@ -13,7 +13,6 @@ public class CustomerTest {
         Movie movie = new Movie("", PriceCodes.Regular);
         Rental rental = new Rental(movie, 3);
         testee.addRental(rental);
-
-        Assert.assertTrue(testee.Statement().contains("3.5"));
+        Assert.assertTrue("Check price correctness for regular movie", testee.buildStatement().contains("3.5"));
     }
 }
