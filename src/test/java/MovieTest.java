@@ -8,7 +8,7 @@ public class MovieTest {
     public void shouldPriceAndTitleBeFilledWhenConstructed()
     {
         String expectedTitle = "StarWars";
-        PriceCodes expectedPriceCode = PriceCodes.regular;
+        PriceCodes expectedPriceCode = PriceCodes.Regular;
         Movie testee = new Movie(expectedTitle, expectedPriceCode);
 
         Assert.assertEquals("Check that title filled", expectedTitle, testee.getTitle());
