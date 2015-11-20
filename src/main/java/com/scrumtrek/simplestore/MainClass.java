@@ -6,9 +6,9 @@ class MainClass {
     }
 
     static void main() {
-        Movie cinderella = new Movie("Cinderella", PriceCodes.Childrens);
-        Movie starWars = new Movie("Star Wars", PriceCodes.Regular);
-        Movie gladiator = new Movie("Gladiator", PriceCodes.NewRelease);
+        Movie cinderella = new Movie("Cinderella", PriceCodes.CHILDRENS);
+        Movie starWars = new Movie("Star Wars", PriceCodes.REGULAR);
+        Movie gladiator = new Movie("Gladiator", PriceCodes.PRICE_CODES);
 
         Customer mickeyMouse = new Customer("Mickey Mouse");
 

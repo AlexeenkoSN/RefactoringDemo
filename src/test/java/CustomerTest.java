@@ -10,25 +10,25 @@ public class CustomerTest {
     @Test
     public void shouldStatementContainRightPriceWhenRegularMoviePassedAndDaysLessOrEqualThanTwo() {
         Customer testee = new Customer("");
-        Movie movie = new Movie("", PriceCodes.Regular);
+        Movie movie = new Movie("", PriceCodes.REGULAR);
         Rental rental = new Rental(movie, 1);
         testee.addRental(rental);
-        Assert.assertTrue("Check price correctness for Regular movie", testee.buildStatement().contains("2"));
+        Assert.assertTrue("Check price correctness for REGULAR movie", testee.buildStatement().contains("2"));
     }
 
     @Test
     public void shouldStatementContainRightPriceWhenRegularMoviePassedDaysMoreThanTwo(){
         Customer testee = new Customer("");
-        Movie movie = new Movie("", PriceCodes.Regular);
+        Movie movie = new Movie("", PriceCodes.REGULAR);
         Rental rental = new Rental(movie, 3);
         testee.addRental(rental);
-        Assert.assertTrue("Check price correctness for Regular movie", testee.buildStatement().contains("3.5"));
+        Assert.assertTrue("Check price correctness for REGULAR movie", testee.buildStatement().contains("3.5"));
     }
 
     @Test
     public void shouldStatementContainRightPriceWhenNewReleaseMoviePassed(){
         Customer testee = new Customer("");
-        Movie movie = new Movie("", PriceCodes.NewRelease);
+        Movie movie = new Movie("", PriceCodes.PRICE_CODES);
         Rental rental = new Rental(movie, 3);
         testee.addRental(rental);
         Assert.assertTrue("Check price correctness for new release movie", testee.buildStatement().contains("9"));
@@ -37,7 +37,7 @@ public class CustomerTest {
     @Test
     public void shouldStatementContainRightPriceWhenChildrenMoviePassedWhenDaysLassOrEqualThanThree(){
         Customer testee = new Customer("");
-        Movie movie = new Movie("", PriceCodes.Childrens);
+        Movie movie = new Movie("", PriceCodes.CHILDRENS);
         Rental rental = new Rental(movie, 1);
         testee.addRental(rental);
         Assert.assertTrue("Check price correctness for children's movie", testee.buildStatement().contains("1.5"));
@@ -46,7 +46,7 @@ public class CustomerTest {
     @Test
     public void shouldStatementContainRightPriceWhenChildrenMoviePassedWhenDaysMoreThanThree(){
         Customer testee = new Customer("");
-        Movie movie = new Movie("", PriceCodes.Childrens);
+        Movie movie = new Movie("", PriceCodes.CHILDRENS);
         Rental rental = new Rental(movie, 5);
         testee.addRental(rental);
         Assert.assertTrue("Check price correctness for children's movie", testee.buildStatement().contains("3"));
@@ -57,14 +57,14 @@ public class CustomerTest {
     {
         Movie movie = MovieBuilder
                 .create()
-                .withPriceCode(PriceCodes.Regular)
+                .withPriceCode(PriceCodes.REGULAR)
                 .build();
         Rental rental = new Rental(movie, 1);
 
         Customer testee = new Customer("");
         testee.addRental(rental);
 
-        Assert.assertTrue("Check renter points correctness for Regular movie", testee.buildStatement().contains("1"));
+        Assert.assertTrue("Check renter points correctness for REGULAR movie", testee.buildStatement().contains("1"));
     }
 
     @Test
@@ -72,7 +72,7 @@ public class CustomerTest {
     {
         Movie movie = MovieBuilder
                 .create()
-                .withPriceCode(PriceCodes.Childrens)
+                .withPriceCode(PriceCodes.CHILDRENS)
                 .build();
         Rental rental = new Rental(movie, 1);
 
@@ -87,7 +87,7 @@ public class CustomerTest {
     {
         Movie movie = MovieBuilder
                 .create()
-                .withPriceCode(PriceCodes.NewRelease)
+                .withPriceCode(PriceCodes.PRICE_CODES)
                 .build();
         Rental rental = new Rental(movie, 1);
 
@@ -102,7 +102,7 @@ public class CustomerTest {
     {
         Movie movie = MovieBuilder
                 .create()
-                .withPriceCode(PriceCodes.NewRelease)
+                .withPriceCode(PriceCodes.PRICE_CODES)
                 .build();
         Rental rental = new Rental(movie, 3);
 
