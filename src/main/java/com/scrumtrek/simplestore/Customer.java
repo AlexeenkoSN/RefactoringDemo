@@ -61,12 +61,12 @@ public class Customer {
 	}
 
 	private double calculateChildrenPrice(Rental rental) {
-		double thisAmount = 1.5;
+		double resultPrice = 1.5;
 		if (rental.getDaysRented() > 3)
         {
-            thisAmount = (rental.getDaysRented() - 3) * 1.5;
+            resultPrice = (rental.getDaysRented() - 3) * 1.5;
         }
-		return thisAmount;
+		return resultPrice;
 	}
 
 	private double calculateNewReleasePrice(Rental rental) {
@@ -74,12 +74,12 @@ public class Customer {
 	}
 
 	private double calculateRegularPrice(Rental rental) {
-		double thisAmount = 2;
+		double resultPrice = 2;
 		if (rental.getDaysRented() > 2)
         {
-            thisAmount += (rental.getDaysRented() - 2) * 1.5;
+            resultPrice += (rental.getDaysRented() - 2) * 1.5;
         }
-		return thisAmount;
+		return resultPrice;
 	}
 }
 
