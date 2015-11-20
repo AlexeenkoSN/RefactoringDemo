@@ -1,7 +1,13 @@
 package com.scrumtrek.simplestore;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 class MainClass {
-	 static void Main(String[] args) {
+
+	private MainClass(){}
+
+	 static void Main() {
 		Movie cinderella = new Movie("Cinderella", PriceCodes.Childrens);
 		Movie starWars = new Movie("Star Wars", PriceCodes.Regular);
 		Movie gladiator = new Movie("Gladiator", PriceCodes.NewRelease);
@@ -14,7 +20,10 @@ class MainClass {
 
 		String statement = mickeyMouse.buildStatement();
 
-		System.out.println(statement);
+		 Logger logger = Logger.getLogger("Custom.log");
+		 logger.log(Level.INFO, statement);
+		 
+		 System.out.println(statement);
 	}
 }
 

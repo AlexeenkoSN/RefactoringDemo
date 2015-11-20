@@ -55,9 +55,9 @@ public class Customer {
 
             case Childrens:
                 return  calculateChildrenPrice(rental);
+            default:
+                return 0;
         }
-
-		return 0;
 	}
 
 	private double calculateChildrenPrice(Rental rental) {
@@ -70,7 +70,7 @@ public class Customer {
 	}
 
 	private double calculateNewReleasePrice(Rental rental) {
-		return rental.getDaysRented() * 3;
+		return rental.getDaysRented() * 3.0;
 	}
 
 	private double calculateRegularPrice(Rental rental) {
