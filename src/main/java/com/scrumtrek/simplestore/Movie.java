@@ -1,7 +1,7 @@
 package com.scrumtrek.simplestore;
 
 public class Movie {
-	private String m_Title;
+	final private String m_Title;
 	private PriceCodes m_PriceCode;
 
 	public Movie(String title, PriceCodes priceCode) {
@@ -13,10 +13,6 @@ public class Movie {
 		return m_PriceCode;
 	}
 	
-	public void setPriceCode(PriceCodes value) {
-		m_PriceCode = value;
-	}
-
 	public String getTitle() {
 		return m_Title;
 	}

@@ -4,11 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.stub;
 
-/**
- * Created by root on 19.11.2015.
- */
 public class RentalTest {
     @Test
     public void shouldRentalContainRightRentalDaysWhenCreated(){

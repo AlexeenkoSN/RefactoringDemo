@@ -4,15 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Customer {
-	private String m_Name;
-	private List<Rental> m_Rentals = new ArrayList<Rental>();
+	final private String m_Name;
+	final private List<Rental> m_Rentals = new ArrayList<>();
 
 	public Customer(String name) {
 		m_Name = name;
-	}
-
-	public String getName() {
-		return m_Name;
 	}
 
 	public void addRental(Rental arg){
